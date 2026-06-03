@@ -177,7 +177,7 @@ pytest tests/
 **Google Cloud Rapid Agent Hackathon 2026**
 - **Track:** Arize
 - **Deadline:** June 11, 2026
-- **Prize:** $5,000 (1st place)
+<!-- - **Prize:** $5,000 (1st place) -->
 
 ### License
 
