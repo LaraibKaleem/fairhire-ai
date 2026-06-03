@@ -1,0 +1,31 @@
+# Environment
+.env
+.venv
+venv/
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+data/resumes_raw/
+data/resumes_processed/
+
+# Models
+models/bert_screener/
+
+# Jupyter
+.ipynb_checkpoints/
