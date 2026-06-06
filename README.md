@@ -145,7 +145,7 @@ pytest tests/
 | Phase | Days | Focus | Status |
 |-------|------|-------|--------|
 | 1 | 1-3 | Setup & Documentation | ✅ Complete |
-| 2 | 4-5 | Data Collection | ⏳ Pending |
+| 2 | 4-5 | Data Collection | ✅ Complete |
 | 3 | 6-10 | Model Training | ⏳ Pending |
 | 4 | 11-14 | Arize Integration | ⏳ Pending |
 | 5 | 15-22 | Agent Development | ⏳ Pending |
