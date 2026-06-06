@@ -1,20 +1,47 @@
 import os
 from dotenv import load_dotenv
+from phoenix.otel import register
 
 # Load credentials from .env
 load_dotenv()
 
-org_key = os.getenv("ARIZE_ORG_KEY")
-api_key = os.getenv("ARIZE_API_KEY")
+# Google Cloud
 project_id = os.getenv("GCP_PROJECT_ID")
+google_api_key = os.getenv("GOOGLE_API_KEY")
 
-print("Testing Arize Connection...")
-print(f"✅ Organization Key loaded: {org_key[:10]}..." if org_key else "❌ Org Key missing")
-print(f"✅ API Key loaded: {api_key[:10]}..." if api_key else "❌ API Key missing")
-print(f"✅ GCP Project ID loaded: {project_id}" if project_id else "❌ Project ID missing")
+# Phoenix Local (NO API KEY NEEDED)
+PHOENIX_ENDPOINT = os.getenv("PHOENIX_ENDPOINT", "http://localhost:6006")
 
-if org_key and api_key and project_id:
-    print("\n🎉 All credentials loaded successfully!")
-    print("Ready for Phase 2: Data Collection")
+# Connect to local Phoenix
+tracer_provider = register(
+    project_name="my-hackathon-agent",
+    endpoint=PHOENIX_ENDPOINT,
+    auto_instrument=True
+)
+
+print("=" * 50)
+print("🚀 Hackathon Agent Setup")
+print("=" * 50)
+
+# Check Google Cloud
+if project_id:
+    print(f"✅ GCP Project ID: {project_id}")
 else:
-    print("\n❌ Some credentials missing. Check .env file.")
+    print("❌ GCP Project ID missing — add to .env")
+
+if google_api_key:
+    print(f"✅ Google API Key: {google_api_key[:10]}...")
+else:
+    print("❌ GOOGLE_API_KEY missing — add to .env")
+
+# Check Phoenix
+print(f"✅ Phoenix Endpoint: {PHOENIX_ENDPOINT}")
+
+print("=" * 50)
+
+if project_id and google_api_key:
+    print("🎉 Ready to build your agent!")
+    print("   - Gemini 3 will use GOOGLE_API_KEY")
+    print("   - Traces will send to Phoenix at", PHOENIX_ENDPOINT)
+else:
+    print("❌ Fix missing credentials in .env file")

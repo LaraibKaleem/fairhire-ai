@@ -22,16 +22,29 @@ FairHire AI is a multi-component system that monitors resume screening models fo
   - `data/resumes_processed/` - Cleaned data
   - `training_data.csv` - Final training set (2000+ samples)
 
-### 3. Arize Monitoring
+### 3. Arize Phoenix (Monitoring & Observability)
+- **Technology:** Arize Phoenix (open-source, FREE)
+- **Runs:** Locally at http://localhost:6006
+- No signup, no API keys, no cost
+- **Purpose:** Trace and evaluate Gemini agent
+- **Captures:**
+  - Every LLM call to Gemini
+  - Every tool execution step
+  - Every reasoning trace
+  - Errors and performance metrics
+- **MCP Integration:** Local Phoenix MCP server
+- **Why:** Complete visibility into agent behavior
+
+<!-- ### 3. Arize Monitoring
 - **Service:** Arize MCP Server
-- **Purpose:** Monitor model performance, detect drift
+- **Purpose:** Monitor  model performance, detect drift
 - **Tracks:**
   - Model accuracy
   - Precision, Recall, F1-Score
   - Data quality metrics
   - Bias across demographic groups (gender, ethnicity, education)
-- **Alerts:** Triggered when thresholds exceeded
-- **MCP Integration:** Agent connects via MCP protocol
+- **Alerts:** Triggeredwhen thresholds exceeded
+- **MCP Integration:** Agent connects via MCP protocol -->
 
 ### 4. Gemini Agent (Monitoring Brain)
 - **LLM:** Google Gemini 1.5 Pro

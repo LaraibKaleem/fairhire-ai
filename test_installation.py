@@ -48,4 +48,7 @@ except:
 import streamlit
 print(f"✅ Streamlit version: {streamlit.__version__}")
 
+import phoenix
+print(f"✅ Phoenix installed: {phoenix.__version__}")
+
 print("\n🎉 All installations successful!")
