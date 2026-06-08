@@ -51,4 +51,7 @@ print(f"✅ Streamlit version: {streamlit.__version__}")
 import phoenix
 print(f"✅ Phoenix installed: {phoenix.__version__}")
 
+import google.generativeai; 
+print('Gemini: OK')
+
 print("\n🎉 All installations successful!")
