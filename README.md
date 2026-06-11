@@ -163,10 +163,6 @@ pytest tests/
 ### Author
 
 **Laraib Kaleem**
-- Published NLP Researcher (Springer Nature, 2024)
-- MS Data Science (Bahria University)
-- BS Computer Science (CASE, Pakistan)
-- Specialization: NLP, ML, Explainable AI
 
 📧 Email: laraibkaleem15@gmail.com
 🔗 LinkedIn: https://www.linkedin.com/in/laraibkaleem/
@@ -176,7 +172,7 @@ pytest tests/
 
 **Google Cloud Rapid Agent Hackathon 2026**
 - **Track:** Arize
-- **Deadline:** June 11, 2026
+- **Deadline:** June 12, 2026
 <!-- - **Prize:** $5,000 (1st place) -->
 
 ### License
@@ -190,13 +186,13 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 - Gemini for advanced reasoning capabilities
 - Hugging Face for BERT models
 
-### Contact & Support
+<!-- ### Contact & Support
 
 For questions, suggestions, or collaborations:
 - Open an issue on GitHub
 - Email: laraibkaleem15@gmail.com
 - Discord: [Community Discord Link]
 
----
+--- -->
 
 **Built with ❤️ for fair hiring powered by AI**
