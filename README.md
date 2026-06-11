@@ -163,7 +163,6 @@ pytest tests/
 ### Author
 
 **Laraib Kaleem**
-
 📧 Email: laraibkaleem15@gmail.com
 🔗 LinkedIn: https://www.linkedin.com/in/laraibkaleem/
 🐙 GitHub: https://github.com/LaraibKaleem
