@@ -1,197 +1,339 @@
-# FairHire AI
+# ⚖️ FairHire AI
 
-## An AI Agent for Fair Resume Screening
+###  Bias-Free Recruitment Intelligence Systems
 
-FairHire AI is an intelligent monitoring agent that watches resume screening models 24/7, detects bias and drift in real-time, and explains findings in plain English to help HR teams make fair hiring decisions.
+FairHire AI is an intelligent monitoring agent that audits AI-powered resume screening systems for bias and fairness in real time. It screens candidates, explains every decision using SHAP (SHapley Additive exPlanations), detects discrimination patterns across six bias categories, and delivers plain-English recommendations to HR managers — with every agent step fully traced via Arize Phoenix.
 
-### Problem Statement
+---
 
-Companies deploy AI resume screeners to hire at scale. But these models learn human biases from historical hiring data:
-- Women get rejected at higher rates
-- Non-traditional educational backgrounds penalized
-- Nationality and ethnicity influence decisions
-- Nobody notices until legal risk surfaces
+## 🚨 The Problem
 
-**Real Example:** Amazon's AI hiring tool was scrapped in 2018 because it discriminated against women. The problem still exists across thousands of companies today.
+Companies deploy AI resume screeners to hire at scale. But these models silently learn human biases from historical hiring data:
 
-### Solution: FairHire AI
+- Women get rejected at higher rates than equally qualified men
+- Candidates from non-prestige universities are penalized unfairly
+- Nationality, ethnicity, and name origin influence decisions
+- Career gaps (e.g., maternity leave) trigger automatic rejection
+- Nobody notices until a lawsuit surfaces
 
-An AI agent powered by Gemini that monitors resume screening models and alerts HR teams when bias emerges.
+**Real Example:** Amazon scrapped its AI hiring tool in 2018 after discovering it systematically discriminated against women. The same problem exists across thousands of companies today — silently.
 
-**What It Does:**
-1. ✅ Monitors model accuracy 24/7
-2. ✅ Detects when models become biased
-3. ✅ Explains why in plain English (using SHAP/LIME)
-4. ✅ Recommends corrective actions
-5. ✅ Runs automatically on Arize MCP
+**Our Discovery:** After training FairHire AI's own screening model on real resume data, SHAP revealed:
+- `"minority"` → SHAP impact of **-0.0165** (model penalizes minority candidates)
+- `"local institute"` → SHAP impact of **-0.0149** (education bias detected)
+- `"ai"` → **negative** impact even for an AI/ML engineering role (illogical learned correlation)
 
-### Key Features
+This is not a hypothetical problem. It is measurable and provable — and FairHire AI proves it.
 
-- **Real-time Bias Detection:** Monitors hiring rates across demographic groups
-- **Explainable AI:** Uses SHAP and LIME to explain decisions
-- **Multi-step Agent:** Intelligent agent that investigates issues independently
-- **Interactive Dashboard:** Built with Streamlit for HR managers
-- **Production-Ready:** Uses industry tools (Gemini, Arize, Google Cloud)
+---
 
-### How It Works
-HR Manager Asks: "Why are we rejecting women?"
+## ✅ The Solution
+
+FairHire AI acts as an automated, transparent auditor placed on top of any resume screening pipeline. It does not replace the existing model — it watches it, explains it, and flags when it discriminates.
+
+### Four-Step Pipeline
+**Step 1: SCREEN**
+- Random Forest + TF-IDF classifier
+- screens the resume → HIRE / REJECT + probability score
+
+**Step 2: EXPLAIN (SHAP[SHapley Additive exPlanations identifies])**
+- exactly which words drove the decision (positive factors vs. negative factors)
+
+**Step 3: DETECT BIAS**
+- Rule-based engine checks across
+- 6 bias categories → flags discrimination
+
+**Step 4: REASON (Gemini)**
+- Gemini 2.0 Flash synthesizes all findings
+- into plain-English summary + recommendation
+
+**for the HR manager**
+- All steps traced by Arize Phoenix (OpenTelemetry)
+
+---
+
+## ✨ Key Features
+
+| Feature | Description |
+|---|---|
+| 📤 Resume Screening | Upload PDF/DOCX/TXT or paste text, select job position, get instant HIRE/REJECT decision |
+| 🔬 SHAP Explainability | Visual breakdown of which resume words/phrases helped or hurt the candidate |
+| ⚖️ Bias Detection | Six-category bias risk scoring with radar chart, bar chart, and toggle filters |
+| 🤖 Gemini Reasoning | Plain-English decision summary, key factors, bias analysis, and HR recommendation |
+| 👥 Similar Candidates | Skill-overlap matching (Jaccard similarity) to find comparable candidates |
+| 📈 Bias Analytics | Trend charts showing bias risk patterns over time across all screened candidates |
+| 📋 Screening History | Full log of all decisions with CSV export for audit/compliance |
+| 🔗 Phoenix Observability | Every agent step traced via Arize Phoenix + OpenTelemetry |
+
+---
+
+## 🧠 How It Works
+HR Manager uploads resume
+
 ↓
-Agent investigates via Arize MCP
+
+Random Forest + TF-IDF screens it
+
+(81.85% accuracy, 90.78% precision)
+
 ↓
-Finds: Women 60% rejection, Men 28% rejection
+
+SHAP computes feature-level explanation
+
+"minority: -0.0165, local institute: -0.0149"
+
 ↓
-Root cause: Training data was 78% male
+
+Bias detection checks 6 categories:
+
+Gender / Age / Racial-Ethnic /
+
+Educational / Experience / Socioeconomic
+
 ↓
-SHAP explains which features caused bias
+
+Gemini 2.0 Flash reasons over all findings:
+
+"DECISION SUMMARY: ...
+
+KEY FACTORS: ...
+
+BIAS ANALYSIS: Gender bias flagged.
+
+RECOMMENDATION: Manual review required."
+
 ↓
-Agent returns:
-"Your model has learned gender bias.
-Recommendation: Retrain with balanced data.
-Legal risk: High. Audit last 100 rejections."
 
-### Tech Stack
+Arize Phoenix records the full trace
 
-**AI & ML**
-- PyTorch / TensorFlow
-- BERT Transformers
-- SHAP / LIME (Explainability)
+(all steps, inputs, outputs, latency)
 
-**Cloud & Infrastructure**
-- Google Cloud Platform
-- Google Cloud Agent Builder
-- Gemini 1.5 Pro LLM
-- Arize (Model Monitoring via MCP)
+↓
 
-**Data & Dashboard**
-- Pandas / NumPy / Scikit-learn
-- Streamlit (Dashboard)
-- Plotly (Visualizations)
-- SQLite / Turso Cloud (Database)
+Results displayed on Streamlit dashboard
 
-### Getting Started
+---
 
-#### Prerequisites
-- Python 3.11+
-- Google Cloud Account ($300 free credits)
-- Arize Account (free tier available)
-- GitHub Account
+## 🛠️ Tech Stack
 
-#### Installation
+### AI & Machine Learning
+| Tool | Full Form | Role |
+|---|---|---|
+| Random Forest | Random Forest (ensemble of decision trees) | Core resume screening model |
+| TF-IDF | Term Frequency – Inverse Document Frequency | Converts resume text to numerical features |
+| SHAP | SHapley Additive exPlanations | Explains individual model predictions |
+| LIME | Local Interpretable Model-agnostic Explanations | Secondary explainability method |
+| scikit-learn | Scientific Kit – Learn (Python ML library) | Implements RF classifier and TF-IDF vectorizer |
 
-1. **Clone the repository**
+### LLM & Agent
+| Tool | Full Form | Role |
+|---|---|---|
+| Gemini 2.0 Flash | Google Gemini 2.0 Flash (Large Language Model) | Plain-English reasoning and recommendations |
+| Google GenAI SDK | Google Generative AI Software Development Kit | Python client for Gemini API calls |
+| Google Cloud Agent Builder | Google Cloud Agent Builder (GCP AI platform) | Cloud infrastructure for agent deployment |
+
+### Observability
+| Tool | Full Form | Role |
+|---|---|---|
+| Arize Phoenix | Arize AI Phoenix (open-source LLM observability) | Traces every agent step at localhost:6006 |
+| OpenTelemetry | Open Telemetry (open standard for observability) | Underlying tracing protocol and span management |
+| OTel SDK | OpenTelemetry Software Development Kit | Python SDK for creating and exporting spans |
+
+### Dashboard & Data
+| Tool | Full Form | Role |
+|---|---|---|
+| Streamlit | Streamlit (Python web app framework) | Interactive HR manager dashboard |
+| Plotly | Plotly (interactive graphing library) | Radar charts, gauges, bar charts, trend lines |
+| Pandas | Panel Data Analysis library (Python) | Data manipulation and dataset operations |
+| NumPy | Numerical Python | Array operations and numerical computing |
+
+### Infrastructure
+| Tool | Full Form | Role |
+|---|---|---|
+| GCP | Google Cloud Platform | Cloud project and API management |
+| GitHub | Git-based code hosting platform | Source code, version control, public repo |
+| Streamlit Community Cloud | Streamlit Community Cloud (free hosting) | Public deployment for judge access |
+| Python-dotenv | Python dotenv (environment variable loader) | Manages API keys via .env file |
+
+---
+
+## 📊 Model Performance
+
+| Metric | Score |
+|---|---|
+| Accuracy | **81.85%** |
+| Precision | **90.78%** |
+| Recall | **70.83%** |
+| F1 Score | **79.57%** |
+| Training Samples | 2,116 |
+| Test Samples | 529 |
+| Total Dataset | 2,645 resumes (50% hired / 50% rejected) |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+Python 3.11+
+
+Google Cloud Account (free $300 credits available)
+
+Gemini API Key (free tier at aistudio.google.com)
+
+GitHub Account
+
+### Installation
+
+**1. Clone the repository**
 ```bash
-   git clone https://github.com/LaraibKaleem/fairhire-ai
-   cd fairhire-ai
+git clone https://github.com/LaraibKaleem/fairhire-ai
+cd fairhire-ai
 ```
 
-2. **Create virtual environment**
+**2. Create virtual environment**
 ```bash
-   python -m venv .venv
-   .venv\Scripts\Activate.ps1  # Windows
-   source .venv/bin/activate   # Mac/Linux
+python -m venv .venv
+.venv\Scripts\Activate.ps1   # Windows PowerShell
+source .venv/bin/activate     # Mac/Linux
 ```
 
-3. **Install dependencies**
+**3. Install dependencies**
 ```bash
-   pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
-4. **Set up credentials**
+**4. Set up credentials**
 ```bash
-   # Create .env file with:
-   GCP_PROJECT_ID=your-project-id
-   ARIZE_ORG_KEY=your-org-key
-   ARIZE_API_KEY=your-api-key
+# Create .env file with:
+GCP_PROJECT_ID=your-project-id
+GOOGLE_API_KEY=your-gemini-api-key
+PHOENIX_PORT=6006
 ```
 
-5. **Run dashboard**
-```bash
-   streamlit run dashboard/app.py
-```
-
-### Project Structure
-fairhire-ai/
-├── agent/                    # Agent logic & MCP integration
-├── data/                    # Datasets (resumes, job descriptions)
-├── dashboard/               # Streamlit dashboard
-├── models/                 # Trained BERT model
-├── notebooks/              # Jupyter notebooks for experimentation
-├── tests/                  # Unit tests
-├── xai/                    # SHAP & LIME explainability
-├── ARCHITECTURE.md         # Detailed system design
-├── LICENSE                 # MIT License
-├── README.md              # This file
-└── requirements.txt       # Python dependencies
-
-### Usage
-
-#### Run Dashboard
+**5. Run the dashboard**
 ```bash
 streamlit run dashboard/app.py
 ```
 
-#### Train Model (Phase 2)
+**6. (Optional) Run agent with Phoenix tracing**
 ```bash
-jupyter notebook notebooks/02_bert_training.ipynb
+# Terminal 1 — start Phoenix server
+python -m phoenix.server.main serve
+
+# Terminal 2 — run agent
+python agent/agent.py
 ```
 
-#### Run Tests
-```bash
-pytest tests/
-```
+**7. View Phoenix traces**
+Open browser: http://localhost:6006
 
-### Phases & Timeline
+Click: Traces tab
 
-| Phase | Days | Focus | Status |
-|-------|------|-------|--------|
-| 1 | 1-3 | Setup & Documentation | ✅ Complete |
-| 2 | 4-5 | Data Collection | ✅ Complete |
-| 3 | 6-10 | Model Training | ✅ Complete |
-| 4 | 11-14 | Arize Integration | ✅ Complete |
-| 5 | 15-22 | Agent Development | ✅ Complete |
-| 6 | 23-25 | Dashboard & Deployment | ✅ Complete |
-| 7 | 26-28 | Demo & Submission | ⏳ Pending |
+See every agent step traced in real time
 
-### Business Impact
+---
 
-- **Legal Protection:** Prevents discrimination lawsuits
-- **Compliance:** Meets EU AI Act and local regulations
-- **Hiring Quality:** Recognizes talent beyond keywords
-- **Diversity:** Increases representation across all backgrounds
-- **Reputation:** Protects brand from public backlash
+## 📁 Project Structure
+fairhire-ai/
 
-### Author
+├── agent/
 
-**Laraib Kaleem**
-📧 Email: laraibkaleem15@gmail.com
-🔗 LinkedIn: https://www.linkedin.com/in/laraibkaleem/
-🐙 GitHub: https://github.com/LaraibKaleem
+│   ├── agent.py              # Main Gemini-powered agent
 
-### Hackathon
+│   ├── prompts/
 
-**Google Cloud Rapid Agent Hackathon 2026**
-- **Track:** Arize
-- **Deadline:** June 12, 2026
-<!-- - **Prize:** $5,000 (1st place) -->
+│   │   └── system_prompt.txt # Agent system instructions
 
-### License
+│   └── tools/
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file for details.
+│       └── model_tools.py    # Screen, explain, detect bias, metrics
 
-### Acknowledgments
+├── dashboard/
 
-- Google Cloud for providing $300 free credits
-- Arize for MCP server integration
-- Gemini for advanced reasoning capabilities
-- Hugging Face for BERT models
+│   └── app.py                # Streamlit 4-tab dashboard
 
-<!-- ### Contact & Support
+├── data/
 
-For questions, suggestions, or collaborations:
-- Open an issue on GitHub
-- Email: laraibkaleem15@gmail.com
-- Discord: [Community Discord Link]
+│   ├── process_resumes.py    # Data pipeline and labeling
 
---- -->
+│   ├── resumes_raw/          # Raw Kaggle dataset (2,485 resumes)
 
-**Built with ❤️ for fair hiring powered by AI**
+│   └── resumes_processed/
+
+│       ├── training_data.csv # Balanced labeled dataset (2,645 rows)
+
+│       └── bias_examples.csv # 80 synthetic bias examples
+
+├── models/
+
+│   ├── train_model.py        # Random Forest training script
+
+│   ├── bert_screener/
+
+│   │   └── model.pkl         # Trained Random Forest model
+
+│   └── model_metrics.json    # Accuracy, precision, recall, F1
+
+├── tests/
+
+│   └── test_phoenix.py       # Phoenix connection test
+
+├── xai/                      # SHAP & LIME explainability modules
+
+├── ARCHITECTURE.md           # Full system design document
+
+├── requirements.txt          # Python dependencies
+
+├── .env.example              # Environment variable template
+
+├── LICENSE                   # MIT License
+
+└── README.md                 # This file
+
+---
+
+## 💼 Business Impact
+
+| Benefit | Detail |
+|---|---|
+| ⚖️ Legal Protection | Prevents discrimination lawsuits before they happen |
+| 📋 Compliance | Supports EU AI Act, EEOC (US), Equality Act (UK) audit requirements |
+| 🎯 Hiring Quality | Surfaces qualified candidates that keyword-matching misses |
+| 🌍 Diversity | Increases representation by catching demographic bias early |
+| 🏢 Reputation | Protects employer brand from public discrimination backlash |
+| 💰 Cost Saving | Catching bias early is far cheaper than defending a lawsuit |
+
+---
+
+## 🐛 Known Issues & Limitations
+
+- Phoenix observability runs locally only (not available on Streamlit Cloud deployment)
+- Gemini free tier limited to 20 requests/day on gemini-2.0-flash; fallback analysis used when quota exceeded
+- Bias detection is rule-based for MVP; future versions will use statistical fairness metrics (disparate impact ratio, equal opportunity difference)
+- LIME integration installed but not yet live in the pipeline (planned for next version)
+
+---
+
+## 🔮 Future Work
+
+- Bias-corrected model retraining using SHAP findings
+- Cloud-hosted Arize Phoenix instance
+- ATS system connectors (Workday, Greenhouse, Lever)
+- Expanded bias categories (disability, veteran status, religion)
+- Statistical fairness metrics (disparate impact, equal opportunity)
+- Automated compliance report generation (PDF)
+- Multi-company SaaS deployment with authentication
+
+---
+
+## 🙏 Acknowledgments
+
+- Google Cloud — $300 free credits for GCP project setup
+- Arize AI — Phoenix open-source observability platform
+- Google Gemini — advanced LLM reasoning capabilities
+- Kaggle (snehaanbhawal) — Resume dataset (2,485 resumes, 25 categories)
+- Anthropic Claude — development assistance throughout the 9-day sprint
+
+---
+
+*⚖️ Built because every candidate deserves a fair chance.*
