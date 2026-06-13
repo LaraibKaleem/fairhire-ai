@@ -67,53 +67,6 @@ FairHire AI acts as an automated, transparent auditor placed on top of any resum
 
 ---
 
-## 🧠 How It Works
-HR Manager uploads resume
-
-↓
-
-Random Forest + TF-IDF screens it
-
-(81.85% accuracy, 90.78% precision)
-
-↓
-
-SHAP computes feature-level explanation
-
-"minority: -0.0165, local institute: -0.0149"
-
-↓
-
-Bias detection checks 6 categories:
-
-Gender / Age / Racial-Ethnic /
-
-Educational / Experience / Socioeconomic
-
-↓
-
-Gemini 2.0 Flash reasons over all findings:
-
-"DECISION SUMMARY: ...
-
-KEY FACTORS: ...
-
-BIAS ANALYSIS: Gender bias flagged.
-
-RECOMMENDATION: Manual review required."
-
-↓
-
-Arize Phoenix records the full trace
-
-(all steps, inputs, outputs, latency)
-
-↓
-
-Results displayed on Streamlit dashboard
-
----
-
 ## 🛠️ Tech Stack
 
 ### AI & Machine Learning
@@ -230,65 +183,6 @@ Open browser: http://localhost:6006
 Click: Traces tab
 
 See every agent step traced in real time
-
----
-
-## 📁 Project Structure
-fairhire-ai/
-
-├── agent/
-
-│   ├── agent.py              # Main Gemini-powered agent
-
-│   ├── prompts/
-
-│   │   └── system_prompt.txt # Agent system instructions
-
-│   └── tools/
-
-│       └── model_tools.py    # Screen, explain, detect bias, metrics
-
-├── dashboard/
-
-│   └── app.py                # Streamlit 4-tab dashboard
-
-├── data/
-
-│   ├── process_resumes.py    # Data pipeline and labeling
-
-│   ├── resumes_raw/          # Raw Kaggle dataset (2,485 resumes)
-
-│   └── resumes_processed/
-
-│       ├── training_data.csv # Balanced labeled dataset (2,645 rows)
-
-│       └── bias_examples.csv # 80 synthetic bias examples
-
-├── models/
-
-│   ├── train_model.py        # Random Forest training script
-
-│   ├── bert_screener/
-
-│   │   └── model.pkl         # Trained Random Forest model
-
-│   └── model_metrics.json    # Accuracy, precision, recall, F1
-
-├── tests/
-
-│   └── test_phoenix.py       # Phoenix connection test
-
-├── xai/                      # SHAP & LIME explainability modules
-
-├── ARCHITECTURE.md           # Full system design document
-
-├── requirements.txt          # Python dependencies
-
-├── .env.example              # Environment variable template
-
-├── LICENSE                   # MIT License
-
-└── README.md                 # This file
 
 ---
 
