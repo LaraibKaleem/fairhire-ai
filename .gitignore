@@ -26,6 +26,11 @@ data/resumes_processed/
 
 # Models
 models/bert_screener/
+model_metrics.json
+*metrics*.json
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Streamlit
+.streamlit/secrets.toml
